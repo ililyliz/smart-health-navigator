@@ -58,7 +58,7 @@ Before running the project, install:
 
 ```bash
 git clone https://github.com/jennyo08/smart-health-navigator/
-cd main
+cd smart-health-navigator
 ```
 
 ### 2. Create a virtual environment
