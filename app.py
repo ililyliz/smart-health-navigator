@@ -11,7 +11,7 @@ app = Flask(__name__)
 app.logger.setLevel("INFO")
 
 api_key = os.getenv("GEMINI_API_KEY")
-model_name = os.getenv("GEMINI_MODEL", "gemini-2.5-flash")
+model_name = os.getenv("GEMINI_MODEL", "gemini-3.8-flash")
 fallback_model_name = os.getenv("GEMINI_FALLBACK_MODEL")
 
 client = genai.Client(api_key=api_key) if api_key else None
@@ -91,20 +91,33 @@ def chat():
     contents = instructions + "\n\nUser's health question:\n" + message
     config = {"max_output_tokens": 800}
 
+
     try:
         try:
             response = generate_with_retries(
                 model_name, contents, config, attempts=3
             )
-        except Exception:
-            # Only attempt a fallback when the owner explicitly configures one.
-            if not fallback_model_name or fallback_model_name == model_name:
+        except Exception as primary_exc:
+            error_text = str(primary_exc).lower()
+
+            # Only try the fallback for likely temporary failures.
+            transient_error = any(term in error_text for term in (
+                "503", "unavailable", "high demand",
+                "429", "resource_exhausted", "quota",
+                "500", "502", "504", "timeout"
+            ))
+
+            if (
+                not transient_error
+                or not fallback_model_name
+                or fallback_model_name == model_name
+            ):
                 raise
 
             app.logger.warning(
-                "Primary Gemini model failed; trying configured fallback model %s.",
-                fallback_model_name
+                "Primary Gemini model failed temporarily; trying configured fallback."
             )
+
             response = generate_with_retries(
                 fallback_model_name, contents, config, attempts=2
             )
@@ -131,17 +144,45 @@ def chat():
         app.logger.exception("Gemini API request failed")
 
         error_text = str(exc).lower()
-        if "503" in error_text or "unavailable" in error_text or "high demand" in error_text:
-            user_message = "Gemini is temporarily busy. Please wait a few seconds and try again."
+
+        if (
+            "503" in error_text
+            or "unavailable" in error_text
+            or "high demand" in error_text
+        ):
+            user_message = (
+                "The AI service is temporarily busy. "
+                "Please try again in a little while."
+            )
             status = 503
-        elif "429" in error_text or "resource_exhausted" in error_text or "quota" in error_text:
-            user_message = "The AI service has reached a temporary usage limit. Please try again later."
+
+        elif (
+            "429" in error_text
+            or "resource_exhausted" in error_text
+            or "quota" in error_text
+        ):
+            user_message = (
+                "The AI service has reached a usage limit. "
+                "Please try again later."
+            )
             status = 429
+
+        elif "timeout" in error_text:
+            user_message = (
+                "The AI service took too long to respond. "
+                "Please try again."
+            )
+            status = 504
+
         else:
-            user_message = "The AI service could not answer right now. Please try again shortly."
+            user_message = (
+                "The AI service could not answer right now. "
+                "Please try again shortly."
+            )
             status = 502
 
         return jsonify({"error": user_message}), status
+
 
 
 if __name__ == "__main__":
