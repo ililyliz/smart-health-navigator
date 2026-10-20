@@ -33,17 +33,28 @@ Smart Health Navigator is a web-based prototype that lets users submit general h
 The prototype is intended to make general health information easier to explore. It deliberately does not diagnose medical conditions, prescribe medication, replace qualified healthcare professionals, or guarantee the accuracy of its answers. Its usefulness also depends on the availability of the external AI service.
 
 ## Technology Stack
-* Frontend: HTML, CSS, and JavaScript
+* **Frontend: HTML, CSS, and JavaScript**
+
 Used to create a straightforward interface for entering questions and displaying responses.
-* Backend: Python with Flask
+
+* **Backend: Python with Flask**
+
 Handles requests, validates input, communicates with the AI service, and returns responses.
-* AI integration: Google Gemini API via the Google GenAI SDK
+
+* **AI integration: Google Gemini API via the Google GenAI SDK**
+
 Generates conversational responses to health-related questions.
-* Deployment: Render
+
+* **Deployment: Render**
+
 Makes the prototype publicly accessible.
-* Source control: GitHub
+
+* **Source control: GitHub**
+
 Stores the project source code and supports tracking and sharing changes.
-* Configuration: Environment variables
+
+* **Configuration: Environment variables**
+
 Keeps the API key separate from the application source code.
 
 ## How to Run Locally
