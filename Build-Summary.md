@@ -2,6 +2,12 @@
 
 Hack Front India 2026 - Cohort Activity Document
 
+Team name: HACK6KSB
+
+Team members: Navdeep Beniwal, Tamanna Saini, Jenny Oinam, Vanshika
+
+Date prepared: 19 October 2026
+
 Project repository: https://github.com/jennyo08/smart-health-navigator
 
 Live prototype: https://smart-health-navigator-crlw.onrender.com/
@@ -33,14 +39,9 @@ Initial target users are students and general users who want understandable, non
 * Deployment: Render.
 * Source control: GitHub.
 
-## Team and Evidence to Complete
-Team name: HACK6KSB
-
-Team members: Navdeep Beniwal, Tamanna Saini, Jenny Oinam, Vanshika
-
+## Evidence
 User research evidence:
 
-Date prepared: 19 October 2026
 
 ## How to Run Locally
 1. Install a supported Python version.
