@@ -35,10 +35,14 @@ Initial target users are students and general users who want understandable, non
 
 ## Team and Evidence to Complete
 Team name: HACK6KSB
+
 Team members: Navdeep Beniwal, Tamanna Saini, Jenny Oinam, Vanshika
-User research evidence: 
+
+User research evidence:
+
 Date prepared: 19 October 2026
-How to Run Locally
+
+## How to Run Locally
 1. Install a supported Python version.
 2. Install packages with: pip install -r requirements.txt
 3. Set GEMINI_API_KEY and GEMINI_MODEL as environment variables (or use a local .env file that is excluded from Git).
