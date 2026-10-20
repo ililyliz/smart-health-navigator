@@ -60,4 +60,15 @@ What remains unproven: The intended users' level of need, willingness to use the
 
 Therefore, the project demonstrates a working prototype concept, not validated product-market fit or proven health outcomes.
 
+## What I Would Build Next
+
+I would expand Smart Health Navigator with features that help users move from understanding health information to finding reliable resources and taking appropriate next steps.
+
+- **Nearby health facilities:** Allow users to find nearby hospitals, clinics, and pharmacies based on their city or town, with directions and clear guidance for contacting emergency services when necessary.
+- **First-aid guidance:** Provide simple, safety-reviewed first-aid instructions for common situations, with clear warnings about when immediate professional help is needed.
+- **Disease trend visualisations:** Display graphs showing changes in disease incidence or reported cases over time, using reliable and up-to-date public health data.
+- **Health news section:** Share recent health-related news and public health announcements from credible sources, with dates and links to the original reports.
+
+Before building these features, I would first gather feedback from intended users to understand which would be most useful. I would prioritise features based on demonstrated user needs, the reliability of available data, and the ability to provide information safely. In particular, facility listings would need accurate location data, while first-aid guidance and disease trends would require trustworthy sources and regular verification.
+
 
